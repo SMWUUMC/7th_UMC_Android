@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/paper_backgrd"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:padding="10dp"
+    tools:context=".MainActivity">
+
+    <ImageButton
+        android:id="@+id/vector"
+        android:layout_width="40sp"
+        android:layout_height="40sp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/vector"
+        android:layout_marginEnd="180dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="오늘 하루는 어땠나요?"
+        android:textSize="25sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="감정 우표를 선택해주세요"
+        android:textSize="18sp" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="선택한 감정우표를 기반으로 맞춤형 질문이 배달됩니다"
+        android:textSize="10sp"
+        android:paddingTop="25sp"
+        android:paddingBottom="10sp"/>
+
+    <!--1번 우표-->
+    <ImageButton
+        android:id="@+id/stamp1"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/stamp1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="더없이 행복한 하루였어요"
+        android:textSize="16sp" />
+
+    <!--2번 우표-->
+    <ImageButton
+        android:id="@+id/stamp2"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/stamp2"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="들뜨고 흥분돼요"
+        android:textSize="16sp" />
+
+    <!--3번 우표-->
+    <ImageButton
+        android:id="@+id/stamp3"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/stamp3"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="평범한 하루였어요"
+        android:textSize="16sp" />
+
+    <!--4번 우표-->
+    <ImageButton
+        android:id="@+id/stamp4"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/stamp4"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="생각이 많아지고 불안해요"
+        android:textSize="16sp" />
+
+    <!--5번 우표-->
+    <ImageButton
+        android:id="@+id/stamp5"
+        android:layout_width="match_parent"
+        android:layout_height="60sp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/stamp5"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40sp"
+        android:text="부글부글 화가 나요"
+        android:textSize="16sp" />
+
+</LinearLayout>
