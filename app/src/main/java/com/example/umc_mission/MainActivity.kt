@@ -1,8 +1,6 @@
 package com.example.umc_mission
 
-import android.content.Intent
 import android.os.Bundle
-import android.widget.ImageButton
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,24 +9,68 @@ import com.example.umc_mission.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    // binding 변수 선언
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        //setContentView(R.layout.activity_main)
 
-        // 뷰 바인딩 초기화
         binding = ActivityMainBinding.inflate(layoutInflater)
-
-        // 바인딩된 루트 뷰로 레이아웃 설정
         setContentView(binding.root)
 
-        // 이미지버튼 클릭 이벤트(happy)
-        binding.btnHappy.setOnClickListener {
-            val intent = Intent(this, NextActivity::class.java)
-            startActivity(intent)
+        initBottomNavigation()
+    }
+
+    // 하단 바와 프래그먼트 설정
+    private fun initBottomNavigation(){
+
+        // 초기 화면 설정 (홈화면으로)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.main_container, HomeFragment())
+            .commitAllowingStateLoss()
+
+        // 하단 바 메뉴 아이콘 클릭 시 동작
+        binding.mainBnv.setOnItemSelectedListener { item ->
+            when (item.itemId) {
+
+                // 홈 아이콘 선택
+                R.id.navi_home -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_container, HomeFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+
+                // 작성 아이콘 선택
+                R.id.navi_writing -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_container, WritingFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+
+                // 일정 아이콘 선택
+                R.id.navi_calendar -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_container, CalendarFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+
+                // 마이페이지 아이콘 선택
+                R.id.navi_mypage -> {
+                    supportFragmentManager.beginTransaction()
+                        .setCustomAnimations(R.anim.fadein, R.anim.fadeout)
+                        .replace(R.id.main_container, MypageFragment())
+                        .commitAllowingStateLoss()
+                    return@setOnItemSelectedListener true
+                }
+            }
+            false
         }
+
     }
 }
