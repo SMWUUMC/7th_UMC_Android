@@ -57,44 +57,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="698047a1-12a8-4217-bdec-3c416a3e1df1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/java/com/example/umc_week2/CalendarFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/java/com/example/umc_week2/HomeFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/java/com/example/umc_week2/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/java/com/example/umc_week2/SplashActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/java/com/example/umc_week2/UserFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/java/com/example/umc_week2/WriteFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/anim/slide_in_left.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/anim/slide_in_right.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/anim/slide_out_left.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/anim/slide_out_right.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/color/icon_color.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/bell.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/emoji.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/emojibox.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/icon_calendar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/icon_home.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/icon_splash.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/icon_user.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/icon_write.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/letter.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/drawable/mailbox.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/font/gangwoneduhyeonokt.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/font/scdream3.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/font/scdream4.otf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/layout/activity_splash.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/layout/fragment_calendar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/layout/fragment_user.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/layout/fragment_write.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/menu/menu.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/values/styles.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week2/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week2/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week2/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week2/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week2/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week2/src/main/res/values/strings.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
