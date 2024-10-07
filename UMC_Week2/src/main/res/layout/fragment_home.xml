@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:gravity="center|top"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    tools:context=".HomeFragment">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/backgroundRect"
+            android:layout_gravity="center"
+            android:layout_width="160dp"
+            android:layout_height="24dp"
+            android:layout_marginTop="2dp"
+            android:background="#d9d9d9" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:paddingHorizontal="60dp"
+            android:text="날짜"
+            android:fontFamily="@font/gangwoneduhyeonokt"
+            android:textSize="30sp"
+            android:includeFontPadding="false" />
+
+    </FrameLayout>
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="멘트"
+        android:fontFamily="@font/gangwoneduhyeonokt"
+        android:textSize="30sp" />
+
+    <ImageView
+        android:id="@+id/emojibox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="20dp"
+        android:src="@drawable/emojibox" />
+
+    <ImageView
+        android:id="@+id/mailbox"
+        android:layout_width="wrap_content"
+        android:layout_height="530dp"
+        android:layout_gravity="center_horizontal|top"
+        android:adjustViewBounds="true"
+        android:paddingTop="20dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/mailbox" />
+</LinearLayout>
