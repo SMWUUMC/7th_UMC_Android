@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:background="#FFFFFF"
+    android:gravity="center_vertical">
+
+    <!-- 트랙 번호 -->
+    <TextView
+        android:id="@+id/track_number"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text="01"
+        android:textSize="14sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/fon3"
+        android:gravity="center"
+        android:textStyle="bold" />
+
+    <!-- 곡 정보 -->
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingStart="8dp">
+
+        <TextView
+            android:id="@+id/track_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="곡 제목"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:fontFamily="@font/fon3"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/track_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="가수명"
+            android:textSize="12sp"
+            android:textColor="#7C7C7C"
+            android:fontFamily="@font/fon3"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <!-- 재생 버튼 -->
+    <ImageView
+        android:id="@+id/play_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_play"
+        android:layout_marginEnd="12dp" />
+
+    <!-- 더보기 버튼 -->
+    <ImageView
+        android:id="@+id/more_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/option"
+        android:layout_marginEnd="8dp" />
+
+</LinearLayout>

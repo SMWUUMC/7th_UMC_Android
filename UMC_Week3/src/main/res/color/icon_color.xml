@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 선택된 상태 (누른 화면일 때) -->
+    <item android:color="#433ffe" android:state_checked="true" />
+    <item android:color="#433ffe" android:state_selected="true" />
+
+    <!-- 선택되지 않은 상태 (아닐 때) -->
+    <item android:color="#7C7C7C" />
+</selector>

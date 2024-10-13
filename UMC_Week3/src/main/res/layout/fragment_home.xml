@@ -1,0 +1,118 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintDimensionRatio="1:1" />
+
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            app:layout_constraintTop_toBottomOf="@id/viewPager"
+            app:ci_drawable="@drawable/indicator_selected"
+            app:ci_drawable_unselected="@drawable/indicator_unselected"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+
+        <LinearLayout
+            android:id="@+id/release_section_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            app:layout_constraintTop_toBottomOf="@id/indicator"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingTop="15dp"
+            android:paddingHorizontal="15dp"
+            android:paddingBottom="5dp">
+
+            <TextView
+                android:id="@+id/text_today_release"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="오늘 발매 음악"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/fon3"
+                android:textColor="@color/black" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="wrap_content"
+                android:paddingTop="1dp"
+                android:src="@drawable/details" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal"
+                android:gravity="end">
+
+                <TextView
+                    android:id="@+id/text_filter_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="종합"
+                    android:fontFamily="@font/fon3"
+                    android:textSize="16sp"
+                    android:textColor="#433ffe"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:id="@+id/text_filter_domestic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="국내"
+                    android:fontFamily="@font/fon3"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
+                    android:layout_marginEnd="16dp" />
+
+                <TextView
+                    android:id="@+id/text_filter_overseas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="해외"
+                    android:fontFamily="@font/fon3"
+                    android:textSize="16sp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- 오늘 발매 음악 리스트 (RecyclerView) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_albums"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:overScrollMode="never"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="30dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/release_section_header" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

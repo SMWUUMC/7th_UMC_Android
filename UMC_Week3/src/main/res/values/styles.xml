@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavigationViewNoRipple" parent="Widget.MaterialComponents.BottomNavigationView">
+        <!-- BottomNavigationView에 Ripple 효과 제거 -->
+        <item name="android:itemBackground">@android:color/transparent</item>
+        <item name="android:colorControlHighlight">@android:color/transparent</item>
+    </style>
+
+</resources>
