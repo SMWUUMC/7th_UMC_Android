@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="indicator_selected">#433FFE</color> <!-- 선택된 인디케이터 색상 -->
+    <color name="indicator_unselected">#cfcfcf</color> <!-- 선택되지 않은 인디케이터 색상 -->
+</resources>
