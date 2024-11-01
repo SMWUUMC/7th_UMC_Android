@@ -149,7 +149,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/fon3"
-                android:text="1:23"
+                android:text="0:00"
                 android:textColor="#3F51B5"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
