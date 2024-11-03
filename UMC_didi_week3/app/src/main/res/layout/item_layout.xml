@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginEnd="16dp"
+    android:gravity="center|left"
+    android:paddingTop="8dp">
+
+    <ImageView
+        android:id="@+id/album_cover"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/songcover" />
+
+    <TextView
+        android:id="@+id/album_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dumb Dumb"
+        android:textSize="18sp"
+        android:fontFamily="@font/fon3"
+        android:textColor="@color/black"
+        android:maxLines="1"
+        android:paddingLeft="3dp"
+        android:ellipsize="end"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/album_artist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Red Velvet"
+        android:textSize="16sp"
+        android:fontFamily="@font/fon3"
+        android:paddingLeft="3dp"
+        android:textColor="#7C7C7C"
+        android:maxLines="1"
+        android:ellipsize="end" />
+</LinearLayout>

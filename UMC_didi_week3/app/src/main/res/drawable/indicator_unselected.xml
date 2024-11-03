@@ -1,0 +1,4 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
+    <solid android:color="#cfcfcf" /> <!-- 선택되지 않은 상태의 색상 -->
+    <size android:width="10dp" android:height="10dp" /> <!-- 원의 크기 설정 -->
+</shape>

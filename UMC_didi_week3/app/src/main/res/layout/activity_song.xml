@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!--뒤로가기 버튼-->
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/back"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/content_group"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/back_icon"
+        app:layout_constraintBottom_toTopOf="@id/similar_songs_and_playlist_group"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.35">
+
+        <!-- 곡 제목 -->
+        <TextView
+            android:id="@+id/song_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dumb Dumb"
+            android:textSize="24sp"
+            android:fontFamily="@font/fon3"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- 가수 이름과 > 아이콘 -->
+        <TextView
+            android:id="@+id/artist_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red Velvet"
+            android:textSize="16sp"
+            android:fontFamily="@font/fon3"
+            android:textColor="#5c5c5c"
+            app:layout_constraintTop_toBottomOf="@id/song_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp" />
+
+        <ImageView
+            android:id="@+id/artist_more_icon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/details"
+            app:layout_constraintTop_toTopOf="@id/artist_name"
+            app:layout_constraintStart_toEndOf="@id/artist_name"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"/>
+
+        <!-- 앨범 커버 -->
+        <ImageView
+            android:id="@+id/album_cover"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/songcover"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toBottomOf="@id/artist_name"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="30dp" />
+
+        <!-- 가사 -->
+        <TextView
+            android:id="@+id/lyrics"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="낭만적인 영화를 난 꿈꿔왔지만\n네 사랑은 내 손에 늘 땀을 쥐게 해 oh"
+            android:textSize="14sp"
+            android:textColor="#7C7C7C"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/album_cover"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginVertical="20dp" />
+
+        <!-- 좋아요 싫어요 -->
+        <LinearLayout
+            android:id="@+id/like_block_icons"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/lyrics"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/like_icon"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:layout_marginEnd="40dp"
+                android:src="@drawable/good" />
+
+            <ImageView
+                android:id="@+id/block_icon"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:src="@drawable/bad"
+                android:layout_marginStart="16dp" />
+        </LinearLayout>
+
+        <!-- 음악 시간 줄 바 -->
+        <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:max="100"
+            android:progress="30"
+            app:layout_constraintTop_toBottomOf="@id/like_block_icons"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="20dp" />
+
+        <!-- 음악 시간 표시 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/timebar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/seek_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"
+            android:paddingHorizontal="37dp">
+
+            <TextView
+                android:id="@+id/current_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fon3"
+                android:text="0:00"
+                android:textColor="#3F51B5"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/total_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="3:45"
+                android:textSize="16sp"
+                android:fontFamily="@font/fon3"
+                android:textColor="#7C7C7C"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 음악 제어 아이콘 그룹 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/timebar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="20dp">
+
+            <ImageView
+                android:id="@+id/repeat_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/repeat"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="16dp" />
+
+            <ImageView
+                android:id="@+id/prev_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_prev"
+                app:layout_constraintStart_toEndOf="@id/repeat_icon"
+                app:layout_constraintEnd_toStartOf="@id/play_pause_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/play_pause_icon"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_play"
+                app:layout_constraintStart_toEndOf="@id/prev_icon"
+                app:layout_constraintEnd_toStartOf="@id/next_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <ImageView
+                android:id="@+id/next_icon"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:src="@drawable/ic_next"
+                app:layout_constraintStart_toEndOf="@id/play_pause_icon"
+                app:layout_constraintEnd_toStartOf="@id/shuffle_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp" />
+
+            <ImageView
+                android:id="@+id/shuffle_icon"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:src="@drawable/shuffle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- 하단 유사곡 버튼과 재생목록 아이콘 -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/similar_songs_and_playlist_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp">
+
+        <ImageView
+            android:id="@+id/similar_songs_button"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/similarsong"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="5dp" />
+
+        <ImageView
+            android:id="@+id/playlist_icon"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_playlist"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="5dp"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
