@@ -4,16 +4,17 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
+import com.example.umc_week3.R
 
 object MusicPlayer {
 
     private var mediaPlayer: MediaPlayer? = null
     private var isPrepared = false
-    private var isPlaying = false
     private var updateSeekBarThread: Thread? = null
-    private var handler: Handler? = Handler(Looper.getMainLooper())
+    private val handler = Handler(Looper.getMainLooper())
     private var seekBarCallback: ((Int) -> Unit)? = null
+    private var completionListener: (() -> Unit)? = null
+    private var isRepeat = false // 반복 재생 여부
 
     // MediaPlayer 초기화
     fun initPlayer(context: Context) {
@@ -23,44 +24,35 @@ object MusicPlayer {
                     isPrepared = true
                 }
                 setOnCompletionListener {
-                    setPlaying(false) // 강제로 상태를 갱신
-                    handler?.post {
-                        seekBarCallback?.invoke(getCurrentPosition()) // 현재 위치로 UI 업데이트
+                    handler.post {
+                        completionListener?.invoke()
+
+                        // 반복 재생이 활성화된 경우에만 반복 재생 시작
+                        if (isRepeat) {
+                            seekTo(0)
+                            play()
+                        } else {
+                            stopSeekBarUpdate()
+                        }
                     }
                 }
             }
         }
     }
 
-
-
     // 음악 재생
     fun play() {
         if (isPrepared && mediaPlayer?.isPlaying == false) {
             mediaPlayer?.start()
-            isPlaying = true
             startSeekBarUpdate()
         }
     }
 
     // 음악 일시정지
     fun pause() {
-        if (mediaPlayer?.isPlaying == true) {
-            mediaPlayer?.pause()
-            isPlaying = false
-            stopSeekBarUpdate()
-        }
+        mediaPlayer?.pause()
+        stopSeekBarUpdate()
     }
-
-    // 재생 상태 반환
-    fun isPlaying(): Boolean {
-        return isPlaying
-    }
-
-    fun setPlaying(isPlaying: Boolean) {
-        this.isPlaying = isPlaying
-    }
-
 
     // 현재 재생 위치 반환
     fun getCurrentPosition(): Int {
@@ -79,17 +71,14 @@ object MusicPlayer {
 
     // SeekBar 업데이트 - Thread 시작
     fun startSeekBarUpdate() {
+        if (updateSeekBarThread?.isAlive == true) return
+
         updateSeekBarThread = Thread {
             try {
-                while (isPlaying) {
+                while (mediaPlayer?.isPlaying == true) {
                     val currentPosition = getCurrentPosition()
-
-                    // UI 업데이트
-                    handler?.post {
-                        seekBarCallback?.invoke(currentPosition)
-                    }
-
-                    Thread.sleep(1000) // 1초마다 업데이트
+                    handler.post { seekBarCallback?.invoke(currentPosition) }
+                    Thread.sleep(1000)
                 }
             } catch (e: InterruptedException) {
                 e.printStackTrace()
@@ -109,12 +98,22 @@ object MusicPlayer {
         seekBarCallback = callback
     }
 
+    // 외부에서 호출 가능한 setOnCompletionListener 추가
+    fun setOnCompletionListener(listener: () -> Unit) {
+        completionListener = listener
+    }
+
+    // 반복 재생 설정
+    fun setLooping(loop: Boolean) {
+        isRepeat = loop // 내부적으로 반복 재생 플래그를 업데이트
+        mediaPlayer?.isLooping = loop
+    }
+
     // MediaPlayer 해제
     fun release() {
         mediaPlayer?.release()
         mediaPlayer = null
         isPrepared = false
-        isPlaying = false
         stopSeekBarUpdate()
     }
 }
