@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navi_home"
+        android:icon="@drawable/ic_home"
+        android:title="@string/title_home" />
+
+    <item
+        android:id="@+id/navi_writing"
+        android:icon="@drawable/ic_writing"
+        android:title="@string/title_writing" />
+
+    <item
+        android:id="@+id/navi_calendar"
+        android:icon="@drawable/ic_calendar"
+        android:title="@string/title_calendar" />
+
+    <item
+        android:id="@+id/navi_mypage"
+        android:icon="@drawable/ic_mypage"
+        android:title="@string/title_mypage" />
+
+</menu>

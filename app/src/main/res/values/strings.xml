@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">UMC_MISSION</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="title_activity_main_home">MainHomeActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_writing">Writing</string>
+    <string name="title_calendar">Calendar</string>
+    <string name="title_mypage">MyPage</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
