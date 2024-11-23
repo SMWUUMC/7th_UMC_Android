@@ -22,7 +22,7 @@ class HomeFragment : Fragment() {
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
     private var currentPage = 0
-    private val delayMillis: Long = 4000 // 3초마다 슬라이드
+    private val delayMillis: Long = 4000 // 4초마다 슬라이드
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +35,7 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Sample banner data with new bannerImage field
+        // 배너 데이터 샘플
         val bannerData = listOf(
             BannerItem(
                 title = "포근하게 덮어주는 꿈의 \n목소리",
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
                 albumCover2 = R.drawable.cover2,
                 albumTitle2 = "곡 제목 2",
                 artist2 = "아티스트 2",
-                bannerImage = R.drawable.banner // 배너 이미지 추가
+                bannerImage = R.drawable.banner
             ),
             BannerItem(
                 title = "여유로운 하루를 위한 \n재즈",
@@ -57,35 +57,33 @@ class HomeFragment : Fragment() {
                 albumCover2 = R.drawable.cover4,
                 albumTitle2 = "곡 제목 4",
                 artist2 = "아티스트 4",
-                bannerImage = R.drawable.banner2 // 배너 이미지 추가
+                bannerImage = R.drawable.banner2
             )
         )
 
-        // Set up banner adapter
+        // 배너 어댑터 설정
         bannerAdapter = BannerAdapter(bannerData)
         binding.viewPager.adapter = bannerAdapter
-        binding.viewPager.offscreenPageLimit = 3  // 미리 로드할 페이지 수를 설정해 성능 최적화
+        binding.viewPager.offscreenPageLimit = 3
 
-        // Set up CircleIndicator
+        // 인디케이터 설정
         val indicator: CircleIndicator3 = binding.indicator
         indicator.setViewPager(binding.viewPager)
 
-        // Set up auto-slide for the ViewPager
+        // 자동 슬라이드 설정
         handler = Handler(Looper.getMainLooper())
         runnable = object : Runnable {
             override fun run() {
                 if (currentPage == bannerAdapter.itemCount) {
                     currentPage = 0
                 }
-                // 페이지 전환을 setCurrentItem을 사용하여 부드럽게 넘기기
                 binding.viewPager.setCurrentItem(currentPage++, true)
                 handler.postDelayed(this, delayMillis)
             }
         }
-
         handler.postDelayed(runnable, delayMillis)
 
-        // Sample album data
+        // 앨범 데이터 샘플
         val albums = listOf(
             Album(
                 coverResId = R.drawable.songcover,
@@ -110,16 +108,26 @@ class HomeFragment : Fragment() {
             )
         )
 
-        albumAdapter = AlbumAdapter(albums) { album ->
-            navigateToAlbumFragment(album)
-        }
+        // AlbumAdapter 설정 - onItemClick과 onPlayClick 콜백 모두 사용
+        albumAdapter = AlbumAdapter(
+            albums,
+            onItemClick = { album ->
+                navigateToAlbumFragment(album)
+            },
+            onPlayClick = { album ->
+                // 재생 버튼 클릭 시 MiniPlayer 업데이트
+                (activity as MainActivity).updateMiniPlayer(album)
+            }
+        )
 
+        // RecyclerView 설정
         binding.recyclerViewAlbums.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
             adapter = albumAdapter
         }
     }
 
+    // 앨범 상세 화면으로 이동
     private fun navigateToAlbumFragment(album: Album) {
         val albumFragment = AlbumFragment().apply {
             arguments = Bundle().apply {

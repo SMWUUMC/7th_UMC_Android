@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#2B2B2B"
+    android:gravity="center|top">
+
+    <!-- FrameLayout으로 감싸서 둥근 모서리 적용 -->
+    <FrameLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/rounded_background">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+
+                    <!-- 뒤로 가기 버튼 -->
+                    <ImageView
+                        android:id="@+id/backButton"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_back"
+                        android:layout_marginEnd="5dp"
+                        android:paddingTop="4dp"
+                        app:tint="#FFFFFF" />
+
+                    <!-- 제목 -->
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="Pokedex"
+                        android:textSize="20sp"
+                        android:textColor="#FFFFFF"
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"/>
+
+                    <!-- 포켓몬 번호 -->
+                    <TextView
+                        android:id="@+id/pokemonNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="#008"
+                        android:textStyle="bold"
+                        android:textSize="18sp"
+                        android:textColor="#FFFFFF"
+                        android:gravity="end"/>
+            </LinearLayout>
+
+            <!-- 포켓몬 이미지 -->
+            <ImageView
+                android:id="@+id/pokemonImage"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:src="@drawable/bulbasaur" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/pokemonName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Bulbasaur"
+        android:layout_marginTop="25dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="40sp"
+        android:textColor="#FFFFFF" />
+
+    <!-- 상단 FrameLayout과 ConstraintLayout -->
+    <FrameLayout
+        android:id="@+id/mix_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp">
+
+        <View
+            android:id="@+id/type_view"
+            android:layout_width="140dp"
+            android:layout_height="28dp"
+            android:background="@drawable/oval"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:id="@+id/pokemonType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="grass"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"
+            android:layout_marginBottom="2dp" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="22dp"
+        android:paddingHorizontal="30dp">
+
+        <!-- 무게 정보 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/pokemonWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="22.5 KG"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Weight"
+                android:textSize="16sp"
+                android:textColor="#B0BEC5"
+                android:gravity="center"/>
+        </LinearLayout>
+
+        <!-- 키 정보 -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/pokemonHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="8dp"
+                android:text="1.0 M"
+                android:textSize="22sp"
+                android:textColor="#FFFFFF"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Height"
+                android:textSize="16sp"
+                android:textColor="#B0BEC5"
+                android:gravity="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <!-- Base Stats 제목 -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Base Stats"
+        android:textSize="23sp"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="10dp"/>
+
+    <!-- HP 게이지 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="HP     "
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="20dp">
+
+            <ProgressBar
+                android:id="@+id/hpBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:progress="100"
+                android:max="300"
+                android:progressDrawable="@drawable/hp_progress" />
+
+            <TextView
+                android:id="@+id/hpValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="199/300"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:paddingEnd="4dp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- ATK 게이지 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ATK   "
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="20dp">
+
+            <ProgressBar
+                android:id="@+id/atkBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:progress="100"
+                android:max="300"
+                android:progressDrawable="@drawable/atk_progress" />
+
+            <TextView
+                android:id="@+id/atkValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="166/300"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:paddingEnd="4dp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- DEF 게이지 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DEF   "
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="20dp">
+
+            <ProgressBar
+                android:id="@+id/defBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:progress="100"
+                android:max="300"
+                android:progressDrawable="@drawable/def_progress" />
+
+            <TextView
+                android:id="@+id/defValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="164/300"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:paddingEnd="4dp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- SPD 게이지 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SPD   "
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="20dp">
+
+            <ProgressBar
+                android:id="@+id/spdBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:progress="100"
+                android:max="300"
+                android:progressDrawable="@drawable/spd_progress" />
+
+            <TextView
+                android:id="@+id/spdValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="13/300"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:paddingEnd="4dp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+    <!-- EXP 게이지 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginVertical="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EXP   "
+            android:textSize="14sp"
+            android:textColor="#FFFFFF"
+            android:layout_marginEnd="8dp"/>
+
+        <FrameLayout
+            android:layout_width="300dp"
+            android:layout_height="20dp">
+
+            <ProgressBar
+                android:id="@+id/expBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:progress="100"
+                android:max="1000"
+                android:progressDrawable="@drawable/exp_progress" />
+
+            <TextView
+                android:id="@+id/expValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center_vertical"
+                android:text="419/1000"
+                android:textSize="12sp"
+                android:textColor="#FFFFFF"
+                android:paddingEnd="4dp"/>
+        </FrameLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

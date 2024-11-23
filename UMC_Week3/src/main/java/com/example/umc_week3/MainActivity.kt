@@ -114,18 +114,29 @@ class MainActivity : AppCompatActivity() {
 
         // BottomNavigationView 설정
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            if (item.itemId == R.id.home) {
-                if (currentSelectedIndex != 0) {
-                    currentSelectedIndex = 0
-                    supportFragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container, HomeFragment())
-                        .commit()
+            when (item.itemId) {
+                R.id.home -> { // 홈 메뉴 클릭 시
+                    if (currentSelectedIndex != 0) {
+                        currentSelectedIndex = 0
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, HomeFragment())
+                            .commit()
+                    }
+                    true
                 }
-                true
-            } else {
-                false
+                R.id.storage -> { // 4번째 메뉴 클릭 시
+                    if (currentSelectedIndex != 3) { // 4번째 메뉴 인덱스를 3으로 설정
+                        currentSelectedIndex = 3
+                        supportFragmentManager.beginTransaction()
+                            .replace(R.id.fragment_container, StorageFragment()) // StorageFragment로 이동
+                            .commit()
+                    }
+                    true
+                }
+                else -> false // 다른 메뉴는 막아둠
             }
         }
+
     }
 
     override fun onResume() {
@@ -145,11 +156,29 @@ class MainActivity : AppCompatActivity() {
         MusicPlayer.stopSeekBarUpdate()
     }
 
+    // 재생/일시정지 아이콘 업데이트 메서드
     private fun updatePlayPauseIcon() {
         if (isPlaying) {
             binding.musicPlayPause.setImageResource(R.drawable.pause)
         } else {
             binding.musicPlayPause.setImageResource(R.drawable.ic_play)
         }
+    }
+
+    // MiniPlayer 업데이트
+    fun updateMiniPlayer(album: Album) {
+        binding.musicTitle.text = album.trackList[0]
+        binding.musicArtist.text = album.artist
+        binding.musicThumbnail.setImageResource(album.coverResId)
+
+        // 재생을 처음부터 시작하도록 설정
+        MusicPlayer.initPlayer(this)  // MusicPlayer를 새로 초기화하여 처음부터 재생
+        MusicPlayer.seekTo(0)          // 재생 위치를 처음으로 설정
+        MusicPlayer.play()             // 음악 재생 시작
+        MusicPlayer.startSeekBarUpdate() // SeekBar 업데이트 시작
+
+        // 미니 플레이어가 재생 상태로 변경되었음을 표시
+        isPlaying = true
+        updatePlayPauseIcon()
     }
 }

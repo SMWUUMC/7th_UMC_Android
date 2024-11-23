@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:background="#FFFFFF">
+
+    <ImageView
+        android:id="@+id/music_thumbnail"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/songcover" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:id="@+id/music_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dumb Dumb"
+            android:fontFamily="@font/fon3"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/music_artist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Red Velvet"
+            android:fontFamily="@font/fon3"
+            android:textColor="#777"
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:ellipsize="end" />
+    </LinearLayout>
+
+    <!-- 플레이 버튼 -->
+    <ImageView
+        android:id="@+id/play_button"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_play"
+        android:layout_gravity="center_vertical" />
+
+    <!-- 더보기 버튼 -->
+    <ImageView
+        android:id="@+id/more_icon"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/option"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="3dp"/>
+
+</LinearLayout>
