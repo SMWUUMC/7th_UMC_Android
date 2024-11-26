@@ -7,9 +7,12 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_week3.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 import me.relex.circleindicator.CircleIndicator3
 
 class HomeFragment : Fragment() {
@@ -23,6 +26,7 @@ class HomeFragment : Fragment() {
     private lateinit var runnable: Runnable
     private var currentPage = 0
     private val delayMillis: Long = 4000 // 4초마다 슬라이드
+    private lateinit var songDatabase: SongDatabase // RoomDB 인스턴스
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,6 +39,17 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // RoomDB 초기화
+        songDatabase = SongDatabase.getDatabase(requireContext())
+
+        // 배너 데이터 설정
+        setupBanner()
+
+        // 앨범 데이터 설정
+        fetchAlbumData()
+    }
+
+    private fun setupBanner() {
         // 배너 데이터 샘플
         val bannerData = listOf(
             BannerItem(
@@ -82,62 +97,41 @@ class HomeFragment : Fragment() {
             }
         }
         handler.postDelayed(runnable, delayMillis)
+    }
 
-        // 앨범 데이터 샘플
-        val albums = listOf(
-            Album(
-                coverResId = R.drawable.songcover,
-                title = "The Red",
-                artist = "Red Velvet",
-                info = "2015.09.09 | 정규 | 댄스",
-                trackList = listOf("Dumb Dumb", "Huff n Puff", "Campfire", "Red Dress", "Oh Boy", "Lady's Room", "Time Slip", "Don't U Wait No More", "Day 1", "Cool World")
-            ),
-            Album(
-                coverResId = R.drawable.cover3,
-                title = "Pink Venom",
-                artist = "BLACKPINK",
-                info = "2022.08.19 | 싱글 | 힙합, EDM, 팝 랩",
-                trackList = listOf("Pink Venom", "Ready for Love")
-            ),
-            Album(
-                coverResId = R.drawable.cover4,
-                title = "expérgo",
-                artist = "NMIXX",
-                info = "2023.03.20 | EP | 팝",
-                trackList = listOf("Young, Dumb, Stupid", "Love Me Like This", "PAXXWORD", "Just Did It", "My Gosh", "HOME")
+    private fun fetchAlbumData() {
+        lifecycleScope.launch {
+            val albums = songDatabase.albumDao().getAllAlbums()
+
+            // RoomDB에서 가져온 데이터로 AlbumAdapter 설정
+            albumAdapter = AlbumAdapter(
+                albums,
+                onItemClick = { album ->
+                    navigateToAlbumFragment(album.id)
+                },
+                onPlayClick = { album ->
+                    // 재생 버튼 클릭 시 MiniPlayer 업데이트
+                    lifecycleScope.launch {
+                        val firstSong = songDatabase.songDao().getSongsByAlbumId(album.id).firstOrNull()
+                        if (firstSong != null) {
+                            (activity as? MainActivity)?.updateMiniPlayerWithSong(firstSong)
+                        } else {
+                            Toast.makeText(requireContext(), "앨범에 곡이 없습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
             )
-        )
 
-        // AlbumAdapter 설정 - onItemClick과 onPlayClick 콜백 모두 사용
-        albumAdapter = AlbumAdapter(
-            albums,
-            onItemClick = { album ->
-                navigateToAlbumFragment(album)
-            },
-            onPlayClick = { album ->
-                // 재생 버튼 클릭 시 MiniPlayer 업데이트
-                (activity as MainActivity).updateMiniPlayer(album)
+            // RecyclerView 설정
+            binding.recyclerViewAlbums.apply {
+                layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+                adapter = albumAdapter
             }
-        )
-
-        // RecyclerView 설정
-        binding.recyclerViewAlbums.apply {
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = albumAdapter
         }
     }
 
-    // 앨범 상세 화면으로 이동
-    private fun navigateToAlbumFragment(album: Album) {
-        val albumFragment = AlbumFragment().apply {
-            arguments = Bundle().apply {
-                putString("albumTitle", album.title)
-                putString("artistName", album.artist)
-                putInt("albumCoverResId", album.coverResId)
-                putString("albumInfo", album.info)
-                putStringArrayList("trackList", ArrayList(album.trackList))
-            }
-        }
+    private fun navigateToAlbumFragment(albumId: Int) {
+        val albumFragment = AlbumFragment.newInstance(albumId) // 수정된 AlbumFragment와 연동
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, albumFragment)
             .addToBackStack(null)

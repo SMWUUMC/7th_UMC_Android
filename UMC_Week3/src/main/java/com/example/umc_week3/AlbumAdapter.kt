@@ -30,9 +30,10 @@ class AlbumAdapter(
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: Album) {
-            binding.albumCover.setImageResource(album.coverResId)
+            // RoomDB에서 가져온 데이터를 사용하여 UI를 업데이트
+            album.coverImg?.let { binding.albumCover.setImageResource(it) } // coverImg는 Int? 타입
             binding.albumTitle.text = album.title
-            binding.albumArtist.text = album.artist
+            binding.albumArtist.text = album.singer
 
             // 앨범 아이템 클릭 시
             binding.root.setOnClickListener {
