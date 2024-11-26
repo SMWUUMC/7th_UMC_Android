@@ -6,19 +6,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import com.example.umc_week3.databinding.FragmentAlbumBinding
 import com.google.android.material.tabs.TabLayoutMediator
+import kotlinx.coroutines.launch
 
 class AlbumFragment : Fragment() {
 
     private var _binding: FragmentAlbumBinding? = null
     private val binding get() = _binding!!
 
-    private var albumTitle: String? = null
-    private var artistName: String? = null
-    private var albumInfo: String? = null
-    private var albumCoverResId: Int? = null
-    private var trackList: List<String>? = null
+    private var albumId: Int = -1 // 전달받은 앨범 ID
+    private lateinit var songDatabase: SongDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,30 +30,46 @@ class AlbumFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 전달된 데이터를 받음
-        albumTitle = arguments?.getString("albumTitle")
-        artistName = arguments?.getString("artistName")
-        albumInfo = arguments?.getString("albumInfo")
-        albumCoverResId = arguments?.getInt("albumCoverResId")
-        trackList = arguments?.getStringArrayList("trackList")
+        // RoomDB 초기화
+        songDatabase = SongDatabase.getDatabase(requireContext())
 
-        // 로그로 trackList 값 확인
-        Log.d("AlbumFragment", "TrackList: $trackList")
+        // arguments에서 albumId를 받음
+        albumId = arguments?.getInt("albumId") ?: -1
 
-        // 받은 데이터를 UI에 반영
-        binding.albumTitle.text = albumTitle
-        binding.albumArtist.text = artistName
-        binding.albumInfo.text = albumInfo
-        albumCoverResId?.let { binding.albumCover.setImageResource(it) }
+        if (albumId != -1) {
+            fetchAlbumData()
+        } else {
+            Log.e("AlbumFragment", "Invalid albumId passed to fragment")
+        }
 
+        // 뒤로가기 버튼 클릭 시 이전 화면으로 이동
+        binding.backIcon.setOnClickListener {
+            parentFragmentManager.popBackStack()
+        }
+    }
 
-        val adapter = AlbumPagerAdapter(
-            this,
-            trackList ?: emptyList(),
-            artistName ?: ""
-        )
+    private fun fetchAlbumData() {
+        lifecycleScope.launch {
+            val album = songDatabase.albumDao().getAlbumById(albumId)
+
+            if (album != null) {
+                // UI 업데이트
+                binding.albumTitle.text = album.title
+                binding.albumArtist.text = album.singer
+                binding.albumInfo.text = "${album.releaseDate} | ${album.type} | ${album.genre}"
+                album.coverImg?.let { binding.albumCover.setImageResource(it) }
+
+                // ViewPager와 TabLayout 설정
+                setupViewPager(albumId)
+            } else {
+                Log.e("AlbumFragment", "Album not found for id: $albumId")
+            }
+        }
+    }
+
+    private fun setupViewPager(albumId: Int) {
+        val adapter = AlbumPagerAdapter(this, albumId) // albumId를 전달
         binding.viewPager.adapter = adapter
-
 
         // TabLayout과 ViewPager2 연결
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
@@ -64,15 +79,20 @@ class AlbumFragment : Fragment() {
                 2 -> tab.text = "영상"
             }
         }.attach()
-
-        // 뒤로가기 버튼 클릭 시 HomeFragment로 이동
-        binding.backIcon.setOnClickListener {
-            parentFragmentManager.popBackStack()
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance(albumId: Int): AlbumFragment {
+            val fragment = AlbumFragment()
+            val args = Bundle()
+            args.putInt("albumId", albumId)
+            fragment.arguments = args
+            return fragment
+        }
     }
 }

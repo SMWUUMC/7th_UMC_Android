@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("kotlin-kapt")
 }
 
 android {
@@ -44,9 +45,17 @@ dependencies {
     implementation("com.google.android.material:material:1.7.0")
     implementation("androidx.viewpager2:viewpager2:1.1.0")
     implementation("me.relex:circleindicator:2.1.6")
+    implementation("androidx.fragment:fragment-ktx:1.5.7")
+    kapt("androidx.room:room-compiler:2.6.1")
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+}
+
+kapt {
+    correctErrorTypes = true // 오류를 보정하도록 설정
 }

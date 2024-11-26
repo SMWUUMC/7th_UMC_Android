@@ -4,39 +4,44 @@ import android.content.Context
 import android.media.MediaPlayer
 import android.os.Handler
 import android.os.Looper
-import com.example.umc_week3.R
+import android.util.Log
+import java.io.IOException
 
 object MusicPlayer {
 
     private var mediaPlayer: MediaPlayer? = null
     private var isPrepared = false
-    private var updateSeekBarThread: Thread? = null
     private val handler = Handler(Looper.getMainLooper())
     private var seekBarCallback: ((Int) -> Unit)? = null
     private var completionListener: (() -> Unit)? = null
     private var isRepeat = false // 반복 재생 여부
 
     // MediaPlayer 초기화
-    fun initPlayer(context: Context) {
-        if (mediaPlayer == null) {
-            mediaPlayer = MediaPlayer.create(context, R.raw.dumb_dumb).apply {
+    fun initPlayer(context: Context, resourceId: Int) {
+        release() // 기존 MediaPlayer 해제
+        try {
+            mediaPlayer = MediaPlayer.create(context, resourceId)
+            if (mediaPlayer == null) {
+                Log.e("MusicPlayer", "MediaPlayer initialization failed with resource ID: $resourceId")
+                return
+            }
+            mediaPlayer?.apply {
                 setOnPreparedListener {
                     isPrepared = true
+                    Log.d("MusicPlayer", "MediaPlayer prepared and starting playback.")
+                    start() // 준비되면 자동 재생
                 }
                 setOnCompletionListener {
-                    handler.post {
+                    if (isRepeat) {
+                        seekTo(0)
+                        start() // 반복 재생
+                    } else {
                         completionListener?.invoke()
-
-                        // 반복 재생이 활성화된 경우에만 반복 재생 시작
-                        if (isRepeat) {
-                            seekTo(0)
-                            play()
-                        } else {
-                            stopSeekBarUpdate()
-                        }
                     }
                 }
             }
+        } catch (e: Exception) {
+            Log.e("MusicPlayer", "Error initializing MediaPlayer", e)
         }
     }
 
@@ -71,26 +76,23 @@ object MusicPlayer {
 
     // SeekBar 업데이트 - Thread 시작
     fun startSeekBarUpdate() {
-        if (updateSeekBarThread?.isAlive == true) return
+        if (!isPrepared) return // 준비가 안 된 경우 업데이트 중단
 
-        updateSeekBarThread = Thread {
-            try {
-                while (mediaPlayer?.isPlaying == true) {
-                    val currentPosition = getCurrentPosition()
-                    handler.post { seekBarCallback?.invoke(currentPosition) }
-                    Thread.sleep(1000)
+        handler.post(object : Runnable {
+            override fun run() {
+                mediaPlayer?.let {
+                    if (it.isPlaying) {
+                        seekBarCallback?.invoke(it.currentPosition)
+                        handler.postDelayed(this, 1000) // 1초마다 업데이트
+                    }
                 }
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
             }
-        }
-        updateSeekBarThread?.start()
+        })
     }
 
     // updateSeekBarThread 중지
     fun stopSeekBarUpdate() {
-        updateSeekBarThread?.interrupt()
-        updateSeekBarThread = null
+        handler.removeCallbacksAndMessages(null)
     }
 
     // SeekBar의 위치를 업데이트하는 콜백 설정
@@ -105,7 +107,7 @@ object MusicPlayer {
 
     // 반복 재생 설정
     fun setLooping(loop: Boolean) {
-        isRepeat = loop // 내부적으로 반복 재생 플래그를 업데이트
+        isRepeat = loop
         mediaPlayer?.isLooping = loop
     }
 

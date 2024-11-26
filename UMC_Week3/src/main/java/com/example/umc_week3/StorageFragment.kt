@@ -7,43 +7,31 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.umc_week3.databinding.FragmentStorageBinding
+import com.google.android.material.tabs.TabLayoutMediator
 
 class StorageFragment : Fragment() {
 
     private var _binding: FragmentStorageBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var songAdapter: SavedSongAdapter
-    private lateinit var songList: MutableList<SavedSong>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentStorageBinding.inflate(inflater, container, false)
 
-        // 데이터 리스트 생성
-        songList = mutableListOf(
-            SavedSong("Dumb Dumb", "Red Velvet", R.drawable.songcover),
-            SavedSong("Pink Venom", "BLACKPINK", R.drawable.cover3),
-            SavedSong("Young, Dumb, Stupid", "NMIXX", R.drawable.cover4),
-            SavedSong("Huff n Puff", "Red Velvet", R.drawable.songcover),
-            SavedSong("Ready for Love", "BLACKPINK", R.drawable.cover3),
-            SavedSong("Love Me Like This", "NMIXX", R.drawable.cover4),
-            SavedSong("Campfire", "Red Velvet", R.drawable.songcover),
-            SavedSong("PAXXWORD", "NMIXX", R.drawable.cover4),
-            SavedSong("Red Dress", "Red Velvet", R.drawable.songcover),
-            SavedSong("Just Did It", "NMIXX", R.drawable.cover4)
-        )
+        // ViewPager2와 TabLayout 연결
+        val adapter = StoragePagerAdapter(this)
+        binding.viewPager.adapter = adapter
 
-        // 어댑터 설정 및 RecyclerView 연결
-        songAdapter = SavedSongAdapter(songList) { position ->
-            songList.removeAt(position)
-            songAdapter.notifyItemRemoved(position)
-            songAdapter.notifyItemRangeChanged(position, songList.size)
-        }
-        binding.songListRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.songListRecyclerView.adapter = songAdapter
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
+            tab.text = when (position) {
+                0 -> "저장한 곡"
+                1 -> "음악 파일"
+                else -> null
+            }
+        }.attach()
+
         return binding.root
     }
 
