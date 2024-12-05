@@ -4,18 +4,17 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.MenuItem
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.umc_week3.databinding.ActivityLoginBinding
-import kotlinx.coroutines.launch
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), LoginView {
 
     private lateinit var binding: ActivityLoginBinding
-    private lateinit var userDatabase: SongDatabase
+    private lateinit var authService: AuthService
     private var isPasswordVisible = false // 비밀번호 표시 여부
     private val sharedPreferences by lazy { getSharedPreferences("UMC_PREFS", Context.MODE_PRIVATE) }
 
@@ -31,8 +30,9 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Room Database 초기화
-        userDatabase = SongDatabase.getDatabase(this)
+        // AuthService 초기화
+        authService = AuthService()
+        authService.setLoginView(this)
 
         // 이메일 도메인 선택
         binding.loginEmailListIv.setOnClickListener {
@@ -55,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
             val email = binding.loginIdEt.text.toString().trim() + "@" + binding.loginDirectInputEt.text.toString().trim()
             val password = binding.loginPasswordEt.text.toString().trim()
 
-            // 로그인 로직 수행
             performLogin(email, password)
         }
     }
@@ -96,51 +95,43 @@ class LoginActivity : AppCompatActivity() {
             return
         }
 
-        lifecycleScope.launch {
-            try {
-                val user = userDatabase.userDao().getUserByEmail(email)
-                if (user == null) {
-                    Toast.makeText(this@LoginActivity, "존재하지 않는 이메일입니다.", Toast.LENGTH_SHORT).show()
-                } else if (user.password != password) {
-                    Toast.makeText(this@LoginActivity, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show()
-                } else {
-                    val fakeJwt = "jwt_for_user_${user.id}" // 서버에서 JWT를 발급받았다고 가정
-                    saveLoginState(fakeJwt, user.id)
-                    Toast.makeText(this@LoginActivity, "로그인 성공!", Toast.LENGTH_SHORT).show()
+        Log.d("LOGIN-ACTIVITY", "User Input: email=$email, password=$password") // 입력 데이터 로그
 
-                    // 저장 앨범 데이터 초기화
-                    refreshSavedAlbums(user.id)
-
-                    navigateToMainActivity()
-                }
-            } catch (e: Exception) {
-                Toast.makeText(this@LoginActivity, "로그인 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun refreshSavedAlbums(userId: Int) {
-        val sharedPreferences = getSharedPreferences("UMC_PREFS", Context.MODE_PRIVATE)
-        sharedPreferences.edit()
-            .putInt("currentUserId", userId)
-            .apply()
+        val request = LoginRequest(email, password)
+        authService.login(request)
     }
 
     private fun saveLoginState(jwt: String, userId: Int) {
         sharedPreferences.edit()
             .putBoolean("isLoggedIn", true)
-            .putString("jwt", jwt)
-            .putInt("userId", userId)
+            .putString("jwt", jwt) // JWT 저장
+            .putInt("userId", userId) // User ID 저장
             .apply()
+        Log.d("LOGIN-SAVE", "JWT: $jwt, UserID: $userId") // 저장 확인 로그
     }
 
     private fun isUserLoggedIn(): Boolean {
-        return sharedPreferences.getBoolean("isLoggedIn", false)
+        val jwt = sharedPreferences.getString("jwt", null)
+        val userId = sharedPreferences.getInt("userId", -1)
+
+        Log.d("LOGIN-STATE", "JWT: $jwt, UserID: $userId") // 상태 확인 로그
+
+        return !jwt.isNullOrEmpty() && userId > 0
     }
 
     private fun navigateToMainActivity() {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish() // 현재 액티비티 종료
+    }
+
+    // LoginView 인터페이스 구현
+    override fun onLoginSuccess(token: String, userId: Int) {
+        saveLoginState(token, userId) // User ID를 저장
+        navigateToMainActivity()
+    }
+
+    override fun onLoginFailure(message: String) {
+        Toast.makeText(this, "로그인 실패: $message", Toast.LENGTH_SHORT).show()
     }
 }
