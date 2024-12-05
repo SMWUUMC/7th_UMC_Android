@@ -55,21 +55,11 @@ class SavedAlbumFragment : Fragment() {
         }
 
         lifecycleScope.launch {
-            try {
-                val likes = songDatabase.likeDao().getLikesByUser(userId)
-
-                val likedAlbums = likes.mapNotNull {
-                    val album = songDatabase.albumDao().getAlbumById(it.albumId)
-                    album
-                }
-
-                if (likedAlbums.isEmpty()) {
-                }
-
-                albumAdapter.updateData(likedAlbums)
-            } catch (e: Exception) {
-                Toast.makeText(requireContext(), "저장된 앨범을 불러오는 중 문제가 발생했습니다.", Toast.LENGTH_SHORT).show()
+            val likes = songDatabase.likeDao().getLikesByUser(userId)
+            val likedAlbums = likes.mapNotNull {
+                songDatabase.albumDao().getAlbumById(it.albumId)
             }
+            albumAdapter.updateData(likedAlbums)
         }
     }
 
@@ -83,7 +73,8 @@ class SavedAlbumFragment : Fragment() {
     }
 
     private fun getCurrentUserId(): Int {
-        val userId = sharedPreferences.getInt("currentUserId", -1)
+        val userId = sharedPreferences.getInt("userId", -1) // userId 기본값 -1
+        Log.d("GET-CURRENT-USER-ID", "Retrieved userId: $userId") // 로그 추가
         return userId
     }
 

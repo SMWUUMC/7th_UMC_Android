@@ -3,6 +3,7 @@ package com.example.umc_week3
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,10 @@ class StorageFragment : Fragment() {
     }
 
     private fun setupLoginState() {
-        if (isUserLoggedIn()) {
+        val loggedIn = isUserLoggedIn()
+        Log.d("LOGIN-SETUP", "User logged in: $loggedIn") // 로그인 상태 확인 로그
+
+        if (loggedIn) {
             binding.lockerLoginTv.text = "로그아웃"
         } else {
             binding.lockerLoginTv.text = "로그인"
@@ -63,7 +67,10 @@ class StorageFragment : Fragment() {
     private fun isUserLoggedIn(): Boolean {
         val jwt = sharedPreferences.getString("jwt", null)
         val userId = sharedPreferences.getInt("userId", -1)
-        return !jwt.isNullOrEmpty() && userId != -1
+
+        Log.d("LOGIN-STATE", "JWT: $jwt, UserID: $userId") // 상태 확인 로그
+
+        return !jwt.isNullOrEmpty() && userId > 0
     }
 
     private fun performLogout() {

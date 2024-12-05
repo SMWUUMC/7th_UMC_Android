@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
@@ -13,14 +14,12 @@ import android.widget.ImageView
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.example.umc_week3.databinding.ActivitySignUpBinding
-import kotlinx.coroutines.launch
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : AppCompatActivity() , SignUpView {
 
     private lateinit var binding: ActivitySignUpBinding
-    private lateinit var userDatabase: SongDatabase
+    private lateinit var authService: AuthService
     private var isPasswordVisible = false // 비밀번호 표시 여부
     private var isPasswordCheckVisible = false // 비밀번호 확인 표시 여부
 
@@ -29,8 +28,9 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // DB 초기화
-        userDatabase = SongDatabase.getDatabase(this)
+        // AuthService 초기화
+        authService = AuthService()
+        authService.setSignUpView(this)
 
         // 가입 완료 버튼 클릭 리스너
         binding.signUpSignUpBtn.setOnClickListener {
@@ -103,28 +103,14 @@ class SignUpActivity : AppCompatActivity() {
             return
         }
 
+        Log.d("SIGNUP-ACTIVITY", "User Input: name=$name, email=$email, password=$password") // 입력 데이터 로그
         // ProgressBar 표시
         binding.signUpLoadingPb.visibility = View.VISIBLE
 
-        // DB에 사용자 데이터 추가
-        lifecycleScope.launch {
-            val user = User(email = email, password = password, name = name)
-            try {
-                userDatabase.userDao().insertUser(user)
-
-                // 회원가입 성공 후 로그인 화면으로 이동
-                Toast.makeText(this@SignUpActivity, "회원가입이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                val intent = Intent(this@SignUpActivity, LoginActivity::class.java)
-                startActivity(intent)
-                finish() // 현재 회원가입 화면 종료
-
-            } catch (e: Exception) {
-                Toast.makeText(this@SignUpActivity, "회원가입 중 오류가 발생했습니다.", Toast.LENGTH_SHORT).show()
-            } finally {
-                // ProgressBar 숨기기
-                binding.signUpLoadingPb.visibility = View.GONE
-            }
-        }
+        // AuthService를 이용해 회원가입 요청
+        val request = SignUpRequest(name, email, password)
+        authService.signUp(request)
+        Log.d("SIGNUP-REQUEST", "name: $name, email: $email, password: $password")
     }
 
     private fun togglePasswordVisibility(
@@ -152,5 +138,20 @@ class SignUpActivity : AppCompatActivity() {
         if (password != passwordCheck) {
             binding.signUpPasswordCheckEt.error = "비밀번호가 일치하지 않습니다."
         }
+    }
+
+    // SignUpView 인터페이스 구현
+    override fun onSignUpSuccess(response: SignUpResponse) {
+        binding.signUpLoadingPb.visibility = View.GONE
+        Toast.makeText(this, "회원가입 성공! ID: ${response.result?.memberId}", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, LoginActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onSignUpFailure(message: String) {
+        binding.signUpLoadingPb.visibility = View.GONE
+
+        Toast.makeText(this, "회원가입 실패: $message", Toast.LENGTH_SHORT).show()
     }
 }
