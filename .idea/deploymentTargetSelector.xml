@@ -26,10 +26,10 @@
       </SelectionState>
       <SelectionState runConfigName="UMC_Week2">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-05T17:57:24.609989300Z">
+        <DropdownSelection timestamp="2024-11-27T09:31:48.817660Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\USER\.android\avd\Pixel_2_API_34.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/ksujin/.android/avd/Medium_Phone.avd" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -37,10 +37,10 @@
       </SelectionState>
       <SelectionState runConfigName="UMC_Week3">
         <option name="selectionMode" value="DROPDOWN" />
-        <DropdownSelection timestamp="2024-10-12T19:50:59.645658800Z">
+        <DropdownSelection timestamp="2024-11-27T04:18:32.298221Z">
           <Target type="DEFAULT_BOOT">
             <handle>
-              <DeviceId pluginId="LocalEmulator" identifier="path=C:\Users\USER\.android\avd\Medium_Phone_API_35_1.avd" />
+              <DeviceId pluginId="LocalEmulator" identifier="path=/Users/ksujin/.android/avd/Medium_Phone.avd" />
             </handle>
           </Target>
         </DropdownSelection>
@@ -64,6 +64,12 @@
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
       <SelectionState runConfigName="UMC_Week5">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="MainActivity">
+        <option name="selectionMode" value="DROPDOWN" />
+      </SelectionState>
+      <SelectionState runConfigName="UMC_Week6">
         <option name="selectionMode" value="DROPDOWN" />
       </SelectionState>
     </selectionStates>

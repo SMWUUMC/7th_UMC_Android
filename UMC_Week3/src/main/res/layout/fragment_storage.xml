@@ -31,7 +31,7 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        android:layout_width="170dp"
+        android:layout_width="250dp"
         android:layout_height="35dp"
         android:layout_marginTop="10dp"
         android:background="#FFFFFF"
@@ -53,6 +53,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="음악파일" />
+
+        <!-- 두 번째 탭 -->
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="저장앨범" />
     </com.google.android.material.tabs.TabLayout>
 
     <TextView

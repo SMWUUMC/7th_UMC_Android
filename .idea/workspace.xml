@@ -55,7 +55,17 @@
           <theme>@style/Theme.UMC_Study</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/activity_login.xml">
+        <config>
+          <theme>@style/Theme.UMC_Study</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/activity_main.xml">
+        <config>
+          <theme>@style/Theme.UMC_Study</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/activity_sign_up.xml">
         <config>
           <theme>@style/Theme.UMC_Study</theme>
         </config>
@@ -85,7 +95,17 @@
           <theme>@style/Theme.UMC_Study</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_look.xml">
+        <config>
+          <theme>@style/Theme.UMC_Study</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_music_file.xml">
+        <config>
+          <theme>@style/Theme.UMC_Study</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_saved_album.xml">
         <config>
           <theme>@style/Theme.UMC_Study</theme>
         </config>
@@ -111,6 +131,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/item_layout.xml">
+        <config>
+          <theme>@style/Theme.UMC_Study</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/UMC_Week3/src/main/res/layout/item_storage_album.xml">
         <config>
           <theme>@style/Theme.UMC_Study</theme>
         </config>
@@ -172,46 +197,54 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="698047a1-12a8-4217-bdec-3c416a3e1df1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumDao.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumWithSongs.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/MusicFileFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SavedSongFragment.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/Song.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SongDao.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SongDatabase.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/StoragePagerAdapter.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_music_file.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_saved_song.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/campfire.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/huff_n_puff.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/love_me_like_this.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/paxxword.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/pink_venom.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/ready_for_love.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/raw/young_dumb_stupid.mp3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/Like.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/LikeDao.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/LoginActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/LookFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SavedAlbumAdapter.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SavedAlbumFragment.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SignUpActivity.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/User.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/UserDao.kt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/apple_44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/btn_actionbar_close.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/btn_arrow_more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/btn_input_password.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/btn_input_password_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/btn_player_more.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/btn_setting_phone.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/button_background_flo_color.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/button_background_white_color.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/fragment_look_chart_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/fragment_look_chip_off_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/fragment_look_chip_on_background.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/ic_browse_arrow_right.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/ic_flo_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/ic_my_like_off.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/ic_my_like_on.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/ico_20_logo_tid_white.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/kakako_44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/naver_44.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable/nugu_btn_down.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/activity_sign_up.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_look.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_saved_album.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/item_storage_album.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/deploymentTargetSelector.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/build.gradle.kts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/Album.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/Album.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumAdapter.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumPagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/AlbumPagerAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/BsideFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/BsideFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/HomeFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/HomeFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/MainActivity.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/MusicPlayer.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/MusicPlayer.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SongActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SongActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SongDatabase.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/SongDatabase.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/StorageFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/StorageFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/StoragePagerAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3/StoragePagerAdapter.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_album.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_album.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_storage.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week3/src/main/res/layout/fragment_storage.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/libs.versions.toml" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/libs.versions.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gradlew.bat" beforeDir="false" afterPath="$PROJECT_DIR$/gradlew.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UMC_Week6/src/main/res/layout/item_pokemon.xml" beforeDir="false" afterPath="$PROJECT_DIR$/UMC_Week6/src/main/res/layout/item_pokemon.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -250,8 +283,9 @@
         <option value="layoutResourceFile_vertical" />
         <option value="valueResourceFile" />
         <option value="resourceFile" />
-        <option value="Class" />
+        <option value="Kotlin Interface" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
         <option value="Kotlin Class" />
       </list>
     </option>
@@ -292,13 +326,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "ScreenRecorder.SavePath": "C:\\Users\\USER\\Desktop",
+    "ScreenRecorder.SavePath": "/Users/ksujin/Desktop/UMC",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "deletionFromPopupRequiresConfirmation": "false",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/ksujin/Documents/GitHub/7th_UMC_Android/UMC_Week3/src/main/res/raw",
+    "last_opened_file_path": "/Users/ksujin/Documents/GitHub/7th_UMC_Android/UMC_Week3/src/main/res/drawable",
     "project.structure.last.edited": "Suggestions",
     "project.structure.proportion": "0.17",
     "project.structure.side.proportion": "0.2",
@@ -311,12 +345,15 @@
     <option name="LAST_EDITED_BUILD_TYPE" value="release" />
   </component>
   <component name="RecentsManager">
+    <key name="android.template.-1102607401">
+      <recent name="com.example.umc_week3" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/UMC_Week3/src/main/res/drawable" />
+      <recent name="$PROJECT_DIR$/UMC_Week3/src/main/java/com/example/umc_week3" />
       <recent name="$PROJECT_DIR$/UMC_Week3/src/main/res/raw" />
       <recent name="C:\Users\USER\Desktop\UMC\git\7th_UMC_Android\UMC_Week6\src\main\res\drawable" />
       <recent name="C:\Users\USER\Desktop\UMC\git\7th_UMC_Android\UMC_Week6\src\main\res" />
-      <recent name="C:\Users\USER\Desktop\UMC\git\7th_UMC_Android\UMC_Week3\src\main\res\raw" />
-      <recent name="C:\Users\USER\Desktop\UMC\git\7th_UMC_Android\UMC_Week3\src\main\res\drawable" />
     </key>
     <key name="CreateKotlinClassDialog.RecentsKey">
       <recent name="com.example.umc_week3" />
@@ -325,10 +362,79 @@
       <recent name="com.example.umc_week6" />
     </key>
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
+      <recent name="com.example.umc_week3" />
       <recent name="com.example.umc_week4" />
     </key>
   </component>
   <component name="RunManager" selected="Android App.UMC_Week3">
+    <configuration name="MainActivity" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
+      <module name="UMC_Study.UMC_Week2.main" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="specific_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY_CLASS" value="com.example.umc_week2.MainActivity" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ThreadActivity (1)" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false" temporary="true">
       <module name="UMC_Study.UMC_Week4.main" />
       <option name="DEPLOY" value="true" />
@@ -943,6 +1049,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Android App.MainActivity" />
         <item itemvalue="Android App.ThreadActivity (1)" />
         <item itemvalue="Android App.ThreadActivity" />
       </list>
