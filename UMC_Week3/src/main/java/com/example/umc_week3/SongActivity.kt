@@ -188,7 +188,7 @@ class SongActivity : AppCompatActivity() {
     private fun setupUIWithSong(song: Song) {
         lifecycleScope.launch {
             // MusicPlayer 초기화
-            MusicPlayer.initPlayer(this@SongActivity, song.music)
+            MusicPlayer.initPlayer(this@SongActivity, song.id)
 
             // UI 업데이트
             binding.songTitle.text = song.title

@@ -1,10 +1,12 @@
 package com.example.umc_week3
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.umc_week3.databinding.FragmentAlbumBinding
@@ -18,6 +20,11 @@ class AlbumFragment : Fragment() {
 
     private var albumId: Int = -1 // 전달받은 앨범 ID
     private lateinit var songDatabase: SongDatabase
+    private var album: Album? = null // 앨범 객체 선언
+    private val sharedPreferences by lazy {
+        requireContext().getSharedPreferences("UMC_PREFS", Context.MODE_PRIVATE)
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,18 +53,38 @@ class AlbumFragment : Fragment() {
         binding.backIcon.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
+
+        // 좋아요 버튼 클릭 이벤트
+        binding.albumLikeIv.setOnClickListener {
+            album?.let {
+                toggleAlbumLike(it)
+            }
+        }
+
+
     }
 
     private fun fetchAlbumData() {
         lifecycleScope.launch {
-            val album = songDatabase.albumDao().getAlbumById(albumId)
+            val albumData = songDatabase.albumDao().getAlbumById(albumId)
 
-            if (album != null) {
+            if (albumData != null) {
+                // 로드된 앨범 데이터를 album 변수에 저장
+                album = albumData
+
                 // UI 업데이트
-                binding.albumTitle.text = album.title
-                binding.albumArtist.text = album.singer
-                binding.albumInfo.text = "${album.releaseDate} | ${album.type} | ${album.genre}"
-                album.coverImg?.let { binding.albumCover.setImageResource(it) }
+                binding.albumTitle.text = albumData.title
+                binding.albumArtist.text = albumData.singer
+                binding.albumInfo.text = "${albumData.releaseDate} | ${albumData.type} | ${albumData.genre}"
+                albumData.coverImg?.let { binding.albumCover.setImageResource(it) }
+
+                // 좋아요 상태 표시
+                val userId = getCurrentUserId()
+                if (songDatabase.likeDao().isAlbumLikedByUser(userId, albumId)) {
+                    binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_on)
+                } else {
+                    binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_off)
+                }
 
                 // ViewPager와 TabLayout 설정
                 setupViewPager(albumId)
@@ -66,6 +93,36 @@ class AlbumFragment : Fragment() {
             }
         }
     }
+
+    private fun toggleAlbumLike(album: Album) {
+        val userId = getCurrentUserId()
+        lifecycleScope.launch {
+            val isLiked = songDatabase.likeDao().isAlbumLikedByUser(userId, album.id)
+
+            if (isLiked) {
+                // 좋아요 해제
+                songDatabase.likeDao().deleteLike(userId, album.id)
+                binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_off)
+                Toast.makeText(requireContext(), "좋아요 해제", Toast.LENGTH_SHORT).show()
+            } else {
+                // 좋아요 추가
+                val like = Like(userId = userId, albumId = album.id)
+                songDatabase.likeDao().insertLike(like)
+                binding.albumLikeIv.setImageResource(R.drawable.ic_my_like_on)
+                Toast.makeText(requireContext(), "좋아요 추가", Toast.LENGTH_SHORT).show()
+            }
+
+            // 좋아요 상태 확인용 로그
+            val likes = songDatabase.likeDao().getLikesByUser(userId)
+            likes.forEach { Log.d("LikeDebug", "User $userId liked album ${it.albumId}") }
+        }
+    }
+
+    private fun getCurrentUserId(): Int {
+        return sharedPreferences.getInt("userId", -1)
+    }
+
+
 
     private fun setupViewPager(albumId: Int) {
         val adapter = AlbumPagerAdapter(this, albumId) // albumId를 전달

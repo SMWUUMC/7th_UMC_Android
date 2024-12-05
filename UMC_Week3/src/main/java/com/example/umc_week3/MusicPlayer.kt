@@ -15,34 +15,59 @@ object MusicPlayer {
     private var seekBarCallback: ((Int) -> Unit)? = null
     private var completionListener: (() -> Unit)? = null
     private var isRepeat = false // 반복 재생 여부
+    private var currentSongId: Int = -1
+
+    val songs = arrayOf(
+        R.raw.dumb_dumb,
+        R.raw.huff_n_puff,
+        R.raw.campfire,
+        R.raw.pink_venom,
+        R.raw.ready_for_love,
+        R.raw.young_dumb_stupid,
+        R.raw.love_me_like_this,
+        R.raw.paxxword
+    )
 
     // MediaPlayer 초기화
-    fun initPlayer(context: Context, resourceId: Int) {
+    fun initPlayer(context: Context, songId: Int) {
         release() // 기존 MediaPlayer 해제
+
         try {
-            mediaPlayer = MediaPlayer.create(context, resourceId)
-            if (mediaPlayer == null) {
-                Log.e("MusicPlayer", "MediaPlayer initialization failed with resource ID: $resourceId")
+            // 배열에서 리소스를 가져옴
+            val resourceId = songs.getOrNull(songId-1)
+            if (resourceId == null) {
+                Log.e("MusicPlayer", "Invalid songId: $songId")
                 return
             }
+
+            mediaPlayer = MediaPlayer.create(context, resourceId)
+            if (mediaPlayer == null) {
+                Log.e("MusicPlayer", "MediaPlayer initialization failed. Resource ID: $resourceId")
+                return
+            }
+
             mediaPlayer?.apply {
                 setOnPreparedListener {
                     isPrepared = true
                     Log.d("MusicPlayer", "MediaPlayer prepared and starting playback.")
-                    start() // 준비되면 자동 재생
+                    start()
                 }
                 setOnCompletionListener {
                     if (isRepeat) {
                         seekTo(0)
-                        start() // 반복 재생
+                        start()
                     } else {
                         completionListener?.invoke()
                     }
                 }
             }
         } catch (e: Exception) {
-            Log.e("MusicPlayer", "Error initializing MediaPlayer", e)
+            Log.e("MusicPlayer", "Error initializing MediaPlayer for songId: $songId", e)
         }
+    }
+
+    fun getCurrentSongId(): Int {
+        return currentSongId
     }
 
     // 음악 재생

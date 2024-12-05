@@ -91,6 +91,19 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
 
+                R.id.explore -> { // 2번째 메뉴 클릭 시
+                    if (currentSelectedIndex != 1) { // 4번째 메뉴 인덱스를 1으로 설정
+                        currentSelectedIndex = 1
+                        supportFragmentManager.beginTransaction()
+                            .replace(
+                                R.id.fragment_container,
+                                LookFragment()
+                            ) // LookFragment로 이동
+                            .commit()
+                    }
+                    true
+                }
+
                 R.id.storage -> { // 4번째 메뉴 클릭 시
                     if (currentSelectedIndex != 3) { // 4번째 메뉴 인덱스를 3으로 설정
                         currentSelectedIndex = 3
@@ -266,7 +279,7 @@ class MainActivity : AppCompatActivity() {
             album?.coverImg?.let { binding.musicThumbnail.setImageResource(it) }
 
             // MusicPlayer 상태 초기화
-            MusicPlayer.initPlayer(this@MainActivity, song.music)
+            MusicPlayer.initPlayer(this@MainActivity, song.id)
             binding.mainSeekbar.max = song.playtime * 1000
 
             // 재생/멈춤 상태 적용
@@ -302,7 +315,10 @@ class MainActivity : AppCompatActivity() {
             val songDao = songDatabase.songDao()
 
             // 중복 삽입 방지
-            if (albumDao.getAllAlbums().isNotEmpty() && songDao.getAllSongs().isNotEmpty()) return@launch
+            if (albumDao.getAllAlbums().isNotEmpty() && songDao.getAllSongs().isNotEmpty()) {
+                Log.d("DummyData", "Albums and songs already exist in the database.")
+                return@launch
+            }
 
             // 1. 앨범 데이터 삽입
             val albumMap = mutableMapOf<String, Long>()
@@ -335,6 +351,7 @@ class MainActivity : AppCompatActivity() {
 
             albums.forEach { album ->
                 val albumId = albumDao.insertAlbum(album)
+                Log.d("DummyData", "Inserted album: $album with ID: $albumId")
                 albumMap[album.title] = albumId
             }
 
@@ -357,6 +374,7 @@ class MainActivity : AppCompatActivity() {
 
             songs.forEach { song ->
                 songDao.insertSong(song)
+                Log.d("DummyData", "Inserted song: $song")
             }
         }
     }
