@@ -67,6 +67,9 @@ dependencies {
     //Glide
     implementation("com.github.bumptech.glide:glide:4.11.0")
     annotationProcessor("com.github.bumptech.glide:compiler:4.11.0")
+
+    // social login
+    implementation("com.kakao.sdk:v2-user:2.15.0")
 }
 
 kapt {
